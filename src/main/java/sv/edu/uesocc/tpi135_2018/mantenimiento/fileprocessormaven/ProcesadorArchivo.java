@@ -36,18 +36,16 @@ private boolean validarPath(final String path){
     return false;
 }
 
-public boolean hasRequiredExtensions(final String path ) throws IOException{
+public List<?> hasRequiredExtensions(final String path ) throws IOException{
    List<?> lista=new ArrayList<>();
    if(path!=null&&!path.isEmpty()){
        this.absolutePath=Paths.get(path);
    lista=Files.walk(absolutePath).
            filter(a -> validarPath(path)).
-           map(a -> a.getFileName().toString().endsWith(".csv")).
-           filter(o -> o.equals(true)).
+           filter(a -> a.getFileName().toString().endsWith(".csv")).
            collect(toList());
-   //return lista.size();
    }
-           return lista.isEmpty();
+           return lista;
 }
 
 public List<List<List<String>>> parser(List<String> paths, boolean saltarLinea,String separador) throws IOException{
