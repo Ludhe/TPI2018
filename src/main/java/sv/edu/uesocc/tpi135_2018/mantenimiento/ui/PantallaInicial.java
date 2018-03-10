@@ -1,29 +1,37 @@
 package sv.edu.uesocc.tpi135_2018.mantenimiento.ui;
 
-import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
-import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicLookAndFeel;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.plaf.multi.MultiLookAndFeel;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-import javax.swing.plaf.synth.SynthLookAndFeel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+import org.jdesktop.observablecollections.ObservableCollections;
+import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.ProcesadorArchivo;
 
 public class PantallaInicial extends javax.swing.JFrame {
+
+    ProcesadorArchivo procesadorArchivo;
+
+    DefaultListModel<String> modeloListaIzquierda;
+    DefaultListModel<String> modeloListaDerecha;
 
     public PantallaInicial() {
         initComponents();
         toggleActivation(false);
-        
-        
-   
+        procesadorArchivo = new ProcesadorArchivo();
+        modeloListaIzquierda = new DefaultListModel<>();
+        modeloListaDerecha = new DefaultListModel<>();
+        listaIzquierda.setModel(modeloListaIzquierda);
+        listaDerecha.setModel(modeloListaDerecha);
     }
 
-    private void toggleActivation(boolean a){
+    private void toggleActivation(boolean a) {
         listaDerecha.setEnabled(a);
         listaIzquierda.setEnabled(a);
         btnAceptar.setEnabled(a);
@@ -32,8 +40,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         btnQuitar.setEnabled(a);
         btnQuitarTodos.setEnabled(a);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +65,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CONVERTIDOR DE ARCHIVOS");
+        setTitle("PARSER DE ARCHIVOS");
         setBackground(new java.awt.Color(254, 254, 254));
         setResizable(false);
 
@@ -82,12 +89,32 @@ public class PantallaInicial extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listaDerecha);
 
         btnAgregar.setText(">");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnAgregarTodos.setText(">>");
+        btnAgregarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarTodosActionPerformed(evt);
+            }
+        });
 
         btnQuitar.setText("<");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         btnQuitarTodos.setText("<<");
+        btnQuitarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarTodosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,6 +154,11 @@ public class PantallaInicial extends javax.swing.JFrame {
         );
 
         btnAceptar.setText("Continuar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel1.setText("Ruta:");
@@ -144,7 +176,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(lblRuta)))
-                .addContainerGap(448, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,12 +211,77 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         if (result != JFileChooser.CANCEL_OPTION) {
 
-            String fileName = selector.getSelectedFile().getPath(); //getAbsolutePath
-            
-            lblRuta.setText(fileName);
-            
+            if (selector.getSelectedFile().canRead()) {
+
+                String fileName = selector.getSelectedFile().getPath(); //getAbsolutePath
+                try {
+                    List<Object> lista = procesadorArchivo.hasRequiredExtensions(fileName);
+
+                    lblRuta.setText(fileName);
+
+                    for (int i = 0; i < lista.size(); i++) {
+                        modeloListaIzquierda.addElement(lista.get(i).toString());
+                    }
+                    if (lista.size() > 0) {
+                        toggleActivation(true);
+                    } else {
+                        toggleActivation(false);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Error al abrir el directorio\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El archivo no se puede leer", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        modeloListaDerecha.addElement(listaIzquierda.getSelectedValue());
+        modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnAgregarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodosActionPerformed
+
+        for (int i = 0; i < modeloListaIzquierda.size(); i++) {
+            modeloListaDerecha.addElement(modeloListaIzquierda.getElementAt(i));
+        }
+        modeloListaIzquierda.removeAllElements();
+    }//GEN-LAST:event_btnAgregarTodosActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+
+        modeloListaIzquierda.addElement(listaDerecha.getSelectedValue());
+        modeloListaDerecha.remove(listaDerecha.getSelectedIndex());
+        
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnQuitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarTodosActionPerformed
+
+        for (int i = 0; i < modeloListaDerecha.size(); i++) {
+            modeloListaIzquierda.addElement(modeloListaDerecha.getElementAt(i));
+        }
+        modeloListaDerecha.removeAllElements();
+    }//GEN-LAST:event_btnQuitarTodosActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        List<String> lista = new ArrayList<>();
+        for (int i = 0; i < modeloListaDerecha.size(); i++) {
+        lista.add(modeloListaDerecha.get(i));
+        }
+        try {
+            System.out.println(procesadorArchivo.parser(lista, true, ","));
+        } catch (IOException ex) {
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,9 +313,9 @@ public class PantallaInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new PantallaInicial().setVisible(true);
-                
+
             }
         });
     }
