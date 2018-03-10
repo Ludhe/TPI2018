@@ -236,9 +236,10 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        modeloListaDerecha.addElement(listaIzquierda.getSelectedValue());
-        modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
-
+        if (listaIzquierda.getSelectedValue() != null) {
+            modeloListaDerecha.addElement(listaIzquierda.getSelectedValue());
+            modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodosActionPerformed
@@ -250,10 +251,10 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarTodosActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-
-        modeloListaIzquierda.addElement(listaDerecha.getSelectedValue());
-        modeloListaDerecha.remove(listaDerecha.getSelectedIndex());
-        
+        if (listaIzquierda.getSelectedValue() != null) {
+            modeloListaIzquierda.addElement(listaDerecha.getSelectedValue());
+            modeloListaDerecha.remove(listaDerecha.getSelectedIndex());
+        }
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnQuitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarTodosActionPerformed
@@ -267,16 +268,15 @@ public class PantallaInicial extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         List<String> lista = new ArrayList<>();
         for (int i = 0; i < modeloListaDerecha.size(); i++) {
-        lista.add(modeloListaDerecha.get(i));
+            lista.add(modeloListaDerecha.get(i));
         }
         try {
             System.out.println(procesadorArchivo.parser(lista, true, ","));
         } catch (IOException ex) {
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
