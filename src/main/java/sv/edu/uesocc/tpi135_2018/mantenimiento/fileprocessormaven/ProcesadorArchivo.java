@@ -35,38 +35,33 @@ public class ProcesadorArchivo {
         return false;
     }
 
-
-public List<Object> hasRequiredExtensions(final String path ) throws IOException{
-   List<Object> lista=new ArrayList<>();
-   if(path!=null&&!path.isEmpty()){
-       this.absolutePath=Paths.get(path);
-   lista=Files.walk(absolutePath).
-           filter(a -> validarPath(path)).
-           filter(a -> a.getFileName().toString().endsWith(".csv")).
-           collect(toList());
-   }
-           return lista;
-}
-
-public List<List<List<String>>> parser(List<String> paths, boolean saltarLinea,String separador) throws IOException{
-    List<List<String>> listaGeneral= new ArrayList<>();
-    List<List<List<String>>> listaMayor = new ArrayList<>();
-    if(paths!=null&&!paths.isEmpty()){
-        for (List<String> list : listaGeneral) {
-            Path pathArchivo = Paths.get(list.toString());
-        if(Files.isReadable(pathArchivo)){
-        Files.lines(pathArchivo).
-                skip(saltarLinea?1:0).
-                filter(l -> l.contains(separador)).
-                forEach((f)->{
-                    listaGeneral.add(Arrays.asList(f.split(separador.concat(REGEX))));
-                });
+    public List<Object> hasRequiredExtensions(final String path) throws IOException {
+        List<Object> lista = new ArrayList<>();
+        if (path != null && !path.isEmpty()) {
+            this.absolutePath = Paths.get(path);
+            lista = Files.walk(absolutePath).
+                    filter(a -> validarPath(path)).
+                    filter(a -> a.getFileName().toString().endsWith(".csv")).
+                    collect(toList());
         }
-        listaMayor.add(listaGeneral);
-        }
+        return lista;
     }
-    return listaMayor;
-}
 
+    public List<List<String>> parser(String path, boolean saltarLinea, String separador) throws IOException {
+        List<List<String>> listaGeneral = new ArrayList<>();
+        List<List<List<String>>> listaMayor = new ArrayList<>();
+        if (path != null && !path.isEmpty()) {
+            Path pathArchivo = Paths.get(path);
+            if (Files.isReadable(pathArchivo)) {
+                Files.lines(pathArchivo).
+                        skip(saltarLinea ? 1 : 0).
+                        filter(l -> l.contains(separador)).
+                        forEach((f) -> {
+                            listaGeneral.add(Arrays.asList(f.split(separador.concat(REGEX))));
+                        });
+            }
+        }
+        return listaGeneral;
+    }
 
 }

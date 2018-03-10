@@ -3,15 +3,11 @@ package sv.edu.uesocc.tpi135_2018.mantenimiento.ui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import org.jdesktop.observablecollections.ObservableCollections;
 import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.ProcesadorArchivo;
 
 public class PantallaInicial extends javax.swing.JFrame {
@@ -240,9 +236,10 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        modeloListaDerecha.addElement(listaIzquierda.getSelectedValue());
-        modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
-
+        if (listaIzquierda.getSelectedValue() != null) {
+            modeloListaDerecha.addElement(listaIzquierda.getSelectedValue());
+            modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodosActionPerformed
@@ -255,9 +252,10 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
 
-        modeloListaIzquierda.addElement(listaDerecha.getSelectedValue());
-        modeloListaDerecha.remove(listaDerecha.getSelectedIndex());
-        
+        if (listaIzquierda.getSelectedValue() != null) {
+            modeloListaIzquierda.addElement(listaDerecha.getSelectedValue());
+            modeloListaDerecha.remove(listaDerecha.getSelectedIndex());
+        }
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnQuitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarTodosActionPerformed
@@ -271,16 +269,13 @@ public class PantallaInicial extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         List<String> lista = new ArrayList<>();
         for (int i = 0; i < modeloListaDerecha.size(); i++) {
-        lista.add(modeloListaDerecha.get(i));
+            lista.add(modeloListaDerecha.get(i));
         }
         try {
             System.out.println(procesadorArchivo.parser(lista, true, ","));
         } catch (IOException ex) {
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
