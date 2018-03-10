@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,8 +35,8 @@ private boolean validarPath(final String path){
     return false;
 }
 
-public List<?> hasRequiredExtensions(final String path ) throws IOException{
-   List<?> lista=new ArrayList<>();
+public List<Object> hasRequiredExtensions(final String path ) throws IOException{
+   List<Object> lista=new ArrayList<>();
    if(path!=null&&!path.isEmpty()){
        this.absolutePath=Paths.get(path);
    lista=Files.walk(absolutePath).
