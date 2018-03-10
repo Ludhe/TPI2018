@@ -3,15 +3,11 @@ package sv.edu.uesocc.tpi135_2018.mantenimiento.ui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import org.jdesktop.observablecollections.ObservableCollections;
 import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.ProcesadorArchivo;
 
 public class PantallaInicial extends javax.swing.JFrame {

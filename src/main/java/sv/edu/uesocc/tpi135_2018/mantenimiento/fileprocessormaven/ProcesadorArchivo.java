@@ -50,9 +50,9 @@ public List<Object> hasRequiredExtensions(final String path ) throws IOException
 public List<List<List<String>>> parser(List<String> paths, boolean saltarLinea,String separador) throws IOException{
     List<List<String>> listaGeneral= new ArrayList<>();
     List<List<List<String>>> listaMayor = new ArrayList<>();
-    if(paths!=null&&!paths.isEmpty()){
-        for (List<String> list : listaGeneral) {
-            Path pathArchivo = Paths.get(list.toString());
+    if(!paths.isEmpty()){
+        for (String path : paths) {
+            Path pathArchivo = Paths.get(path);
         if(Files.isReadable(pathArchivo)){
         Files.lines(pathArchivo).
                 skip(saltarLinea?1:0).
