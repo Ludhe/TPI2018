@@ -1,15 +1,39 @@
 package sv.edu.uesocc.tpi135_2018.mantenimiento.ui;
 
+import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.basic.BasicLookAndFeel;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.multi.MultiLookAndFeel;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 
 public class PantallaInicial extends javax.swing.JFrame {
 
     public PantallaInicial() {
         initComponents();
+        toggleActivation(false);
+        
+        
+   
     }
 
+    private void toggleActivation(boolean a){
+        listaDerecha.setEnabled(a);
+        listaIzquierda.setEnabled(a);
+        btnAceptar.setEnabled(a);
+        btnAgregar.setEnabled(a);
+        btnAgregarTodos.setEnabled(a);
+        btnQuitar.setEnabled(a);
+        btnQuitarTodos.setEnabled(a);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,16 +54,18 @@ public class PantallaInicial extends javax.swing.JFrame {
         btnAgregarTodos = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
         btnQuitarTodos = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CONVERTIDOR DE ARCHIVOS");
         setBackground(new java.awt.Color(254, 254, 254));
         setResizable(false);
 
+        lblRuta.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         lblRuta.setText("No seleccionado");
 
-        btnSeleccionar.setBackground(new java.awt.Color(50, 118, 185));
+        btnSeleccionar.setBackground(new java.awt.Color(101, 147, 193));
         btnSeleccionar.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         btnSeleccionar.setText("Seleccionar carpeta");
         btnSeleccionar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -100,7 +126,10 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addContainerGap(115, Short.MAX_VALUE))
         );
 
-        jButton1.setText("jButton1");
+        btnAceptar.setText("Continuar");
+
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        jLabel1.setText("Ruta:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,14 +138,18 @@ public class PantallaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRuta)
-                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblRuta)))
                 .addContainerGap(448, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,13 +157,15 @@ public class PantallaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRuta)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRuta)
+                    .addComponent(jLabel1))
+                .addGap(28, 28, 28)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(btnAceptar)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,18 +216,21 @@ public class PantallaInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new PantallaInicial().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarTodos;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnQuitarTodos;
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
