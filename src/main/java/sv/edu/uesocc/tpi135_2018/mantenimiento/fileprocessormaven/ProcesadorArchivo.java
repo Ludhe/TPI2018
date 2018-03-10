@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,10 +50,12 @@ public boolean hasRequiredExtensions(final String path ) throws IOException{
            return lista.isEmpty();
 }
 
-public List<List<String>> parser(String nombreArchivo, boolean saltarLinea,String separador) throws IOException{
+public List<List<List<String>>> parser(List<String> paths, boolean saltarLinea,String separador) throws IOException{
     List<List<String>> listaGeneral= new ArrayList<>();
-    if(nombreArchivo!=null&&!nombreArchivo.trim().isEmpty()){
-        Path pathArchivo = Paths.get(absolutePath.toString(),nombreArchivo);
+    List<List<List<String>>> listaMayor = new ArrayList<>();
+    if(paths!=null&&!paths.isEmpty()){
+        for (List<String> list : listaGeneral) {
+            Path pathArchivo = Paths.get(list.toString());
         if(Files.isReadable(pathArchivo)){
         Files.lines(pathArchivo).
                 skip(saltarLinea?1:0).
@@ -61,8 +64,12 @@ public List<List<String>> parser(String nombreArchivo, boolean saltarLinea,Strin
                     listaGeneral.add(Arrays.asList(f.split(separador.concat(REGEX))));
                 });
         }
+        listaMayor.add(listaGeneral);
+        }
     }
-    return listaGeneral;
+    return listaMayor;
 }
+
+
     
 }
