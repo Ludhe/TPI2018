@@ -267,15 +267,15 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuitarTodosActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        List<String> lista = new ArrayList<>();
-        for (int i = 0; i < modeloListaDerecha.size(); i++) {
-            lista.add(modeloListaDerecha.get(i));
-        }
-        try {
-            System.out.println(procesadorArchivo.parser(lista, true, ","));
-        } catch (IOException ex) {
-            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        List<String> lista = new ArrayList<>();
+//        for (int i = 0; i < modeloListaDerecha.size(); i++) {
+//            lista.add(modeloListaDerecha.get(i));
+//        }
+//        try {
+//            System.out.println(procesadorArchivo.parser(lista, true, ","));
+//        } catch (IOException ex) {
+//            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

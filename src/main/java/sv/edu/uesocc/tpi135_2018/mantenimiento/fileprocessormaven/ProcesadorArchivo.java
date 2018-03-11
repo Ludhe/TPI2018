@@ -57,10 +57,13 @@ public class ProcesadorArchivo {
                         skip(saltarLinea ? 1 : 0).
                         filter(l -> l.contains(separador)).
                         forEach((f) -> {
-                            listaGeneral.add(Arrays.asList(f.split(separador.concat(REGEX))));
+                            System.out.println(Arrays.toString(f.split(separador.concat("((?=[^\"']|\"[^\"]*\")+$)"))));
+                            listaGeneral.add(Arrays.asList(f.split(separador.concat("((?=[^\"']|\"[^\"]*\")+$)"))));
                         });
             }
         }
+        System.out.println("listaGeneral: "+listaGeneral);
+        System.out.println("listaMayor:  "+listaMayor);
         return listaGeneral;
     }
 
