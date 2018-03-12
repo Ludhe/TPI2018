@@ -8,14 +8,21 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.ProcesadorArchivo;
+import javax.swing.JCheckBox;
+import javax.swing.DefaultCellEditor;
 
-public class PantallaInicial extends javax.swing.JFrame {
+public class PantallaInicial extends javax.swing.JFrame{
 
     ProcesadorArchivo procesadorArchivo;
 
     DefaultListModel<String> modeloListaIzquierda;
     DefaultListModel<String> modeloListaDerecha;
+   private JTable jTable1;
+        
+       
+    
 
     public PantallaInicial() {
         initComponents();
@@ -24,17 +31,22 @@ public class PantallaInicial extends javax.swing.JFrame {
         modeloListaIzquierda = new DefaultListModel<>();
         modeloListaDerecha = new DefaultListModel<>();
         listaIzquierda.setModel(modeloListaIzquierda);
-        listaDerecha.setModel(modeloListaDerecha);
+      
     }
-
+    
+    
+    
+    
     private void toggleActivation(boolean a) {
-        listaDerecha.setEnabled(a);
+//        jTable1.setEnabled(a);
         listaIzquierda.setEnabled(a);
         btnAceptar.setEnabled(a);
         btnAgregar.setEnabled(a);
         btnAgregarTodos.setEnabled(a);
         btnQuitar.setEnabled(a);
         btnQuitarTodos.setEnabled(a);
+       
+       
     }
 
     /**
@@ -51,8 +63,6 @@ public class PantallaInicial extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaIzquierda = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaDerecha = new javax.swing.JList<>();
         btnAgregar = new javax.swing.JButton();
         btnAgregarTodos = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
@@ -81,8 +91,6 @@ public class PantallaInicial extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione los archivos a enviar"));
 
         jScrollPane1.setViewportView(listaIzquierda);
-
-        jScrollPane2.setViewportView(listaDerecha);
 
         btnAgregar.setText(">");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,31 +130,29 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAgregarTodos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                    .addComponent(btnAgregarTodos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQuitar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQuitarTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgregarTodos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnQuitar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnQuitarTodos)
+                        .addGap(0, 306, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(btnAgregar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAgregarTodos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnQuitar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnQuitarTodos)
-                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         btnAceptar.setText("Continuar");
@@ -176,9 +182,12 @@ public class PantallaInicial extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAceptar)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(262, 262, 262))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +202,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAceptar)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,10 +245,11 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
+        
         if (listaIzquierda.getSelectedValue() != null) {
-            modeloListaDerecha.addElement(listaIzquierda.getSelectedValue());
-            modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
+            
         }
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodosActionPerformed
@@ -253,8 +263,8 @@ public class PantallaInicial extends javax.swing.JFrame {
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
 
         if (listaIzquierda.getSelectedValue() != null) {
-            modeloListaIzquierda.addElement(listaDerecha.getSelectedValue());
-            modeloListaDerecha.remove(listaDerecha.getSelectedIndex());
+//            modeloListaIzquierda.addElement(listaDerecha.getSelectedValue());
+//            modeloListaDerecha.remove(listaDerecha.getSelectedIndex());
         }
     }//GEN-LAST:event_btnQuitarActionPerformed
 
@@ -267,15 +277,24 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuitarTodosActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-//        List<String> lista = new ArrayList<>();
-//        for (int i = 0; i < modeloListaDerecha.size(); i++) {
-//            lista.add(modeloListaDerecha.get(i));
-//        }
-//        try {
-//            System.out.println(procesadorArchivo.parser(lista, true, ","));
-//        } catch (IOException ex) {
-//            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+ 
+        List<String> listaPaths = new ArrayList<>();
+        List<List<List<String>>> listaEntidadesRegistros = new ArrayList<>();
+        List<Boolean> listaSaltar = new ArrayList<>();
+        
+        for (int i = 0; i < modeloListaDerecha.size(); i++) {
+            listaPaths.add(modeloListaDerecha.get(i));
+            
+        }
+        try {
+            for(String path : listaPaths){
+                System.out.println(procesadorArchivo.parser(path, true, ","));
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
@@ -325,9 +344,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblRuta;
-    private javax.swing.JList<String> listaDerecha;
     private javax.swing.JList<String> listaIzquierda;
     // End of variables declaration//GEN-END:variables
 }
