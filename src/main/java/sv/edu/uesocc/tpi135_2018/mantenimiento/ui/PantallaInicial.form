@@ -117,6 +117,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="jScrollPane1" min="-2" pref="335" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -124,6 +125,17 @@
                       <Component id="btnQuitar" max="32767" attributes="0"/>
                       <Component id="btnQuitarTodos" max="32767" attributes="0"/>
                       <Component id="btnAgregar" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+=======
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="btnAgregar" alignment="0" max="32767" attributes="0"/>
+<<<<<<< HEAD
+                      <Component id="btnAgregarTodos" alignment="0" pref="48" max="32767" attributes="0"/>
+=======
+                      <Component id="btnAgregarTodos" alignment="0" max="32767" attributes="0"/>
+>>>>>>> c9a4cd8bb3c13714706cde4c5e0a0f6883738779
+                      <Component id="btnQuitar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnQuitarTodos" alignment="1" max="32767" attributes="0"/>
+>>>>>>> 08fa918e28a588119ad79f98f142b43d4acb7476
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="544" max="-2" attributes="0"/>
