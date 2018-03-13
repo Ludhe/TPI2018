@@ -20,16 +20,16 @@ public class crearJSON {
         JSONArray jsArray = new JSONArray();
         ProcesadorArchivo arc = new ProcesadorArchivo();
         List<List<String>> lista;
+        String[] encabezado = new String[]{"N°", "Historico Mantenimientos", "N° Inventario", "Marca", "N° de Serie", "Modelo",
+            "Responsable", "Sistema Operativo", "Versión", "Licencia (Si/No)", "Observaciones"};
 
-        lista = arc.parser("src/main/resources/archivoaleer.csv", false, ",");
+        lista = arc.parser("src/main/resources/Sin-título-1.csv", false, ",");
 
         for (int i = 0; i < lista.size(); i++) {
-        JSONObject jsObj = new JSONObject();
+            JSONObject jsObj = new JSONObject();
 
             for (int j = 0; j < lista.get(i).size(); j++) {
-
-                jsObj.put("campo " + j, lista.get(i).get(j));
-                
+                jsObj.put(encabezado[j], lista.get(i).get(j));
             }
             jsArray.put(jsObj);
             System.out.println(jsObj);
