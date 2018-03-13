@@ -2,9 +2,8 @@ package sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven;
 
 import java.io.IOException;
 import java.util.List;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-//import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.ProcesadorArchivo;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +17,6 @@ import org.json.simple.JSONArray;
 public class crearJSON {
 
     public static void main(String args[]) throws IOException {
-        JSONObject jsObj = new JSONObject();
         JSONArray jsArray = new JSONArray();
         ProcesadorArchivo arc = new ProcesadorArchivo();
         List<List<String>> lista;
@@ -26,23 +24,17 @@ public class crearJSON {
         lista = arc.parser("src/main/resources/archivoaleer.csv", false, ",");
 
         for (int i = 0; i < lista.size(); i++) {
-//            jsObj.put("campo " + i, lista);
-//            jsArray.add(lista);
-
-//            jsObj.put("campo " + i, lista.get(i));
-//            jsArray.add(lista.get(i));
+        JSONObject jsObj = new JSONObject();
 
             for (int j = 0; j < lista.get(i).size(); j++) {
-//                jsObj.put("campo " + i, lista.get(i));
-//                jsArray.add(lista.get(i));
 
-                jsObj.put("campo " + i, lista.get(i).get(j));
-                jsArray.add(lista.get(i).get(j));
+                jsObj.put("campo " + j, lista.get(i).get(j));
                 
             }
-        }
+            jsArray.put(jsObj);
+            System.out.println(jsObj);
 
-        System.out.println(jsObj);
+        }
         System.out.println(jsArray);
     }
 

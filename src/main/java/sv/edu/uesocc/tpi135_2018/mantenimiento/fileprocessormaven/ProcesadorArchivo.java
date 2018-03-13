@@ -23,7 +23,7 @@ public class ProcesadorArchivo {
 
     private Path absolutePath;
 
-    private static final String REGEX = "((?=[^\"']|\"[^\"]*\")+$)";
+    private static final String REGEX = "(?=([^\"']|\"[^\"]*\")+$)";
 
     private boolean validarPath(final String path) {
 
@@ -57,13 +57,13 @@ public class ProcesadorArchivo {
                         skip(saltarLinea ? 1 : 0).
                         filter(l -> l.contains(separador)).
                         forEach((f) -> {
-                            System.out.println(Arrays.toString(f.split(separador.concat("((?=[^\"']|\"[^\"]*\")+$)"))));
-                            listaGeneral.add(Arrays.asList(f.split(separador.concat("((?=[^\"']|\"[^\"]*\")+$)"))));
+//                            System.out.println(Arrays.toString(f.split(separador.concat(REGEX))));
+                            listaGeneral.add(Arrays.asList(f.split(separador.concat(REGEX))));
                         });
             }
         }
-        System.out.println("listaGeneral: "+listaGeneral);
-        System.out.println("listaMayor:  "+listaMayor);
+//        System.out.println("listaGeneral: "+listaGeneral);
+//        System.out.println("listaMayor:  "+listaMayor);
         return listaGeneral;
     }
 
