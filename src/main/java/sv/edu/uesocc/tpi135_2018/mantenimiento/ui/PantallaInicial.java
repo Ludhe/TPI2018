@@ -2,7 +2,11 @@ package sv.edu.uesocc.tpi135_2018.mantenimiento.ui;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +35,7 @@ public class PantallaInicial extends javax.swing.JFrame {
 //        jTable2.sizeColumnsToFit(0);
         btnAceptar.setEnabled(false);
         setLocationRelativeTo(null);
-        
+
     }
 
     private void toggleActivation(boolean a) {
@@ -43,11 +47,11 @@ public class PantallaInicial extends javax.swing.JFrame {
         btnQuitarTodos.setEnabled(a);
 
     }
-    
-    private void toggleButton(){
-        if(jTable2.getRowCount()>0){
+
+    private void toggleButton() {
+        if (jTable2.getRowCount() > 0) {
             btnAceptar.setEnabled(true);
-        }else{
+        } else {
             btnAceptar.setEnabled(false);
         }
     }
@@ -130,11 +134,11 @@ public class PantallaInicial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Archivo", "Saltar Línea", "Separador"
+                "Archivo", "Saltar Línea", "Separador", "Histórico"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -142,9 +146,10 @@ public class PantallaInicial extends javax.swing.JFrame {
             }
         });
         jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(388);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(312);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -272,8 +277,8 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         String seleccionado = listaIzquierda.getSelectedValue();
         if (seleccionado != null) {
-            modelo.addRow(new Object[]{seleccionado, true, ","});
-            modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());            
+            modelo.addRow(new Object[]{seleccionado, 1, ","});
+            modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
         }
         toggleButton();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -281,7 +286,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     private void btnAgregarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodosActionPerformed
 
         for (int i = 0; i < modeloListaIzquierda.size(); i++) {
-            modelo.addRow(new Object[]{modeloListaIzquierda.getElementAt(i), true, ","});
+            modelo.addRow(new Object[]{modeloListaIzquierda.getElementAt(i), 1, ","});
         }
         modeloListaIzquierda.removeAllElements();
         toggleButton();
@@ -306,13 +311,16 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
-        List<List<List<String>>> aConvertir = new ArrayList<>();
-
+        List<List<Object>> aConvertir = new ArrayList<>();
+        int i = 0;
         try {
-            for (int i = 0; i < jTable2.getRowCount(); i++) {
-                System.out.println(procesadorArchivo.parser(jTable2.getValueAt(i, 0).toString(), Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()),jTable2.getValueAt(i, 2).toString()));
+            for (i = 0; i < jTable2.getRowCount(); i++) {
+                System.out.println(procesadorArchivo.parser(jTable2.getValueAt(i, 0).toString(), Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()), jTable2.getValueAt(i, 2).toString()));
+                //TODO AGREGAR A LA LISTA DE LISTAS DE OBJETOS
             }
+
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al convertir el archivo: " + jTable2.getValueAt(i, 0), "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
