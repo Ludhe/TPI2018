@@ -134,11 +134,11 @@ public class PantallaInicial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Archivo", "Saltar Línea", "Separador", "Histórico"
+                "Archivo", "Histórico", "Separador"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -146,10 +146,9 @@ public class PantallaInicial extends javax.swing.JFrame {
             }
         });
         jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(312);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(385);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
