@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
+import sv.edu.uesocc.tpi135_2018.mantenimiento.definiciones.Bitacora;
 
 /**
  *
@@ -47,9 +48,8 @@ public class ProcesadorArchivo {
         return lista;
     }
 
-    public List<List<String>> parser(String path, boolean saltarLinea, String separador) throws IOException {
-        List<List<String>> listaGeneral = new ArrayList<>();
-        List<List<List<String>>> listaMayor = new ArrayList<>();
+    public List<Object> parser(boolean historico, String path, boolean saltarLinea, String separador) throws IOException {//si el primer split es vacio,no tomar en cuenta linea
+        List<Object> listaGeneral = new ArrayList<>();
         if (path != null && !path.isEmpty()) {
             Path pathArchivo = Paths.get(path);
             if (Files.isReadable(pathArchivo)) {
@@ -57,13 +57,17 @@ public class ProcesadorArchivo {
                         skip(saltarLinea ? 1 : 0).
                         filter(l -> l.contains(separador)).
                         forEach((f) -> {
-//                            System.out.println(Arrays.toString(f.split(separador.concat(REGEX))));
-                            listaGeneral.add(Arrays.asList(f.split(separador.concat(REGEX))));
+                            Object[] items = f.split(separador.concat(REGEX));
+                            if (historico) {
+                            
+                            } else {
+                                listaGeneral.add(new Bitacora((int) items[0], (String) items[1], (String) items[2], (String) items[3], (String) items[4],
+                                        (String) items[5], (String) items[6], (String) items[7], (String) items[8], (boolean) items[9], (String) items[10]));
+                            }
+
                         });
             }
         }
-//        System.out.println("listaGeneral: "+listaGeneral);
-//        System.out.println("listaMayor:  "+listaMayor);
         return listaGeneral;
     }
 
