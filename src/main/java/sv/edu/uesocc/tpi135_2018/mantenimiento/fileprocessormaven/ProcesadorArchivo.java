@@ -85,10 +85,6 @@ public class ProcesadorArchivo {
                             objParcial.add(o);
                         }
 
-                        System.out.println("SIZE objparcial inicio" + objParcial.size());
-                        for (Object o : objParcial) {
-                            System.out.println("objparcial inicio" + o);
-                        }
 
                         if (linea.split("\"").length % 2 == 0) {
                             comillasImpares = true;
@@ -96,27 +92,24 @@ public class ProcesadorArchivo {
                         } else {
                             //EVALUAR GUARDAR
                             if (objParcial.size() == 6) {
-                                System.out.println("objeto listo");
+                                
                                 listaGeneral.add(objParcial);
                                
                                 comillasImpares = false;
                                 objParcial = new ArrayList<>();
                             }
                         }
-                        System.out.println("objParcial final inicio" + objParcial.toString());
+                       
                         //objeto a medias
                     } else if (objParcial.size() < 6 || comillasImpares) {
                         if (comillasImpares) {
                             Object[] arrayLinea = linea.split(separador.concat(REGEX));
-                            System.out.println("ARRAYLINEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+Arrays.toString(arrayLinea));
-                            System.out.println("LINEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+linea);
-                            System.out.println("linea de segundo"+linea);
-                            System.out.println("ARRAYLINEA en segundo" + Arrays.toString(arrayLinea));
+                            
                             if (!linea.contains("\"")) {
-                                System.out.println("no hay commillas");
+                                
                                 objParcial.set(objParcial.size() - 1, objParcial.get(objParcial.size() - 1).toString().concat("\n"+arrayLinea[0].toString()));
                             } else {
-                                System.out.println("hay comillas");
+                                
                                 objParcial.set(objParcial.size() - 1, objParcial.get(objParcial.size() - 1).toString().concat("\n"+arrayLinea[0].toString()));
                                 if(!linea.contains("\",\"")){
                                     comillasImpares = false;
@@ -129,12 +122,9 @@ public class ProcesadorArchivo {
                                     }
                                 }
                                 //EVALUAR GUARDAR
-                                System.out.println("objparcial size primer guardar" + objParcial.size());
-                                for (Object o : objParcial) {
-                                    System.out.println("objparcial segundo" + o);
-                                }
+                                
                                 if (objParcial.size() == 6 && !comillasImpares) {
-                                    System.out.println("objeto listo");
+                                   
                                     listaGeneral.add(objParcial);
                                     
                                     comillasImpares = false;
@@ -149,7 +139,7 @@ public class ProcesadorArchivo {
                         } else {
                             //EVALUAR GUARDAR
                             if (objParcial.size() == 6) {
-                                System.out.println("objeto listo");
+                                
                                 listaGeneral.add(objParcial);
                                
                                 comillasImpares = false;
@@ -177,10 +167,7 @@ public class ProcesadorArchivo {
                             objParcial.add(o);
                         }
 
-                        System.out.println("SIZE objparcial inicio" + objParcial.size());
-                        for (Object o : objParcial) {
-                            System.out.println("objparcial inicio" + o);
-                        }
+                        
 
                         if (linea.split("\"").length % 2 == 0) {
                             comillasImpares = true;
@@ -188,27 +175,24 @@ public class ProcesadorArchivo {
                         } else {
                             //EVALUAR GUARDAR
                             if (objParcial.size() == 12) {
-                                System.out.println("objeto listo");
+                                
                                 listaGeneral.add(objParcial);
                                
                                 comillasImpares = false;
                                 objParcial = new ArrayList<>();
                             }
                         }
-                        System.out.println("objParcial final inicio" + objParcial.toString());
+                        
                         //objeto a medias
                     } else if (objParcial.size() < 12 || comillasImpares) {
                         if (comillasImpares) {
                             Object[] arrayLinea = linea.split(separador.concat(REGEX));
-                            System.out.println("ARRAYLINEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+Arrays.toString(arrayLinea));
-                            System.out.println("LINEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+linea);
-                            System.out.println("linea de segundo"+linea);
-                            System.out.println("ARRAYLINEA en segundo" + Arrays.toString(arrayLinea));
+                          
                             if (!linea.contains("\"")) {
-                                System.out.println("no hay commillas");
+                                
                                 objParcial.set(objParcial.size() - 1, objParcial.get(objParcial.size() - 1).toString().concat("\n"+arrayLinea[0].toString()));
                             } else {
-                                System.out.println("hay comillas");
+                               
                                 objParcial.set(objParcial.size() - 1, objParcial.get(objParcial.size() - 1).toString().concat("\n"+arrayLinea[0].toString()));
                                 if(!linea.contains("\",\"")){
                                     comillasImpares = false;
@@ -221,12 +205,9 @@ public class ProcesadorArchivo {
                                     }
                                 }
                                 //EVALUAR GUARDAR
-                                System.out.println("objparcial size primer guardar" + objParcial.size());
-                                for (Object o : objParcial) {
-                                    System.out.println("objparcial segundo" + o);
-                                }
+                                
                                 if (objParcial.size() == 12 && !comillasImpares) {
-                                    System.out.println("objeto listo");
+                                    
                                     listaGeneral.add(objParcial);
                                     
                                     comillasImpares = false;
@@ -241,7 +222,7 @@ public class ProcesadorArchivo {
                         } else {
                             //EVALUAR GUARDAR
                             if (objParcial.size() == 12) {
-                                System.out.println("objeto listo");
+                                
                                 listaGeneral.add(objParcial);
                                
                                 comillasImpares = false;
