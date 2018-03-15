@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.ProcesadorArchivo;
 import javax.swing.table.DefaultTableModel;
+import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.crearJSON;
 
 public class PantallaInicial extends javax.swing.JFrame {
 
@@ -310,19 +311,40 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
-        List<List<Object>> aConvertir = new ArrayList<>();
+        boolean[] historicos = new boolean[jTable2.getRowCount()];
+        for (int k = 0; k < jTable2.getRowCount(); k++) {
+            historicos[k] = Boolean.parseBoolean(jTable2.getValueAt(k, 1).toString());
+        }
+        for (boolean b : historicos) {
+            System.out.println(b);
+        }
+
+        List<List<List<Object>>> listaDeObjects = new ArrayList<>();
+        List<List<Object>> listaDeEntidades = new ArrayList<>();
+
         int i = 0;
 
         try {
             for (i = 0; i < jTable2.getRowCount(); i++) {
-                procesadorArchivo.parser(Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()), jTable2.getValueAt(i, 0).toString(),jTable2.getValueAt(i, 2).toString());
-                //TODO AGREGAR A LA LISTA DE LISTAS DE OBJETOS
+                listaDeObjects.add(procesadorArchivo.parser(Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()), jTable2.getValueAt(i, 0).toString(), jTable2.getValueAt(i, 2).toString()));
             }
-
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al convertir el archivo: " + jTable2.getValueAt(i, 0), "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        crearJSON cj = new crearJSON();
+
+        try {
+            listaDeEntidades = cj.convertirAEntidades(listaDeObjects, historicos);
+            System.out.println(cj.generarJSON(listaDeEntidades, historicos));
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Error al convertir una fecha..." + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al convertir archivos..." + ex.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        }
+
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 

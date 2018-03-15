@@ -51,8 +51,8 @@ public class ProcesadorArchivo {
         return lista;
     }
 
-    public List<Object> parser(boolean historico, String path, String separador) throws IOException {//si el primer split es vacio,no tomar en cuenta linea
-        List<Object> listaGeneral = new ArrayList<>();
+    public List<List<Object>> parser(boolean historico, String path, String separador) throws IOException {//si el primer split es vacio,no tomar en cuenta linea
+        List<List<Object>> listaGeneral = new ArrayList<>();
         if (path != null && !path.isEmpty()) {
             Path pathArchivo = Paths.get(path);
             if (Files.isReadable(pathArchivo)) {
@@ -63,17 +63,21 @@ public class ProcesadorArchivo {
                 String linea;
                 List<Object> objParcial = new ArrayList<>();
                 int contadorLineas = 0;
-                
+                String NumInventario = "";
                 boolean comillasImpares = false;
+                
                 while ((linea = br.readLine()) != null) {
                     if (contadorLineas < 7) {
+                        if(contadorLineas == 3){
+                            NumInventario = linea.split(separador.concat(REGEX))[1];
+                        }
                         contadorLineas++;
                         continue;
                     }
 
                     //comenzando objeto
                     if (objParcial.isEmpty()) {
-                        objParcial.add("No-generico");
+                        objParcial.add(NumInventario);
                         Object[] arrayLinea = linea.split(separador.concat(REGEX));
 
                         for (Object o : arrayLinea) {
@@ -110,7 +114,7 @@ public class ProcesadorArchivo {
                                 objParcial.set(objParcial.size() - 1, objParcial.get(objParcial.size() - 1).toString().concat("\n"+arrayLinea[0].toString()));
                             } else {
                                 System.out.println("hay comillas");
-                                objParcial.set(objParcial.size() - 1, objParcial.get(objParcial.size() - 1).toString().concat("\n"+arrayLinea[0].toString()));
+                                objParcial.set(objParcial.size() - 1, objParcial.get(objParcial.size() - 1).toString().concat("\n"+arrayLinea[0].toString()+"\""));
                                 comillasImpares = false;
                                 for (int i = 1; i < arrayLinea.length; i++) {
                                     if (arrayLinea[i] != null && !arrayLinea[i].toString().isEmpty()) {

@@ -19,13 +19,13 @@ public class Historico implements Serializable{
     }
     
     private int numero;
-    private int numInventario;
+    private String numInventario;
     private Date fecha;
     private String mantenimiento;
     private String observacionesSoftware;
     private String observacionesHardware;
     
-    public Historico(int numero, int numInventario, Date fecha, String mantenimiento, String observacionesSoftware, String observacionesHardware ){
+    public Historico( String numInventario,int numero, Date fecha, String mantenimiento, String observacionesSoftware, String observacionesHardware ){
         this.numero = numero;
         this.numInventario = numInventario;
         this.fecha = fecha;
@@ -108,14 +108,14 @@ public class Historico implements Serializable{
     /**
      * @return the numInventario
      */
-    public int getNumInventario() {
+    public String getNumInventario() {
         return numInventario;
     }
 
     /**
      * @param numInventario the numInventario to set
      */
-    public void setNumInventario(int numInventario) {
+    public void setNumInventario(String numInventario) {
         this.numInventario = numInventario;
     }
             
