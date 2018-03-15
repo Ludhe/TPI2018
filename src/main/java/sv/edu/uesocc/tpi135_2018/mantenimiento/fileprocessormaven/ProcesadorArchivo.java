@@ -29,7 +29,7 @@ public class ProcesadorArchivo {
 
     private static final String REGEX = "(?=([^\"']|\"[^\"]*\"|\"[^\"]*)+$)";
 
-    private boolean validarPath(final String path) {
+    public boolean validarPath(final String path) {
 
         if (path != null && !path.trim().isEmpty()) {
             File file = new File(path);

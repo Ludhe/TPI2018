@@ -6,6 +6,7 @@
 package sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -47,37 +48,6 @@ public class ProcesadorArchivoTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of hasRequiredExtensions method, of class ProcesadorArchivo.
-     */
-//    @Test
-//    public void testHasRequiredExtensions() throws Exception {
-//        System.out.println("hasRequiredExtensions");
-//        String path = "";
-//        ProcesadorArchivo instance = new ProcesadorArchivo();
-//        List<Object> expResult = null;
-//        List<Object> result = instance.hasRequiredExtensions(path);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-
-    /**
-     * Test of parser method, of class ProcesadorArchivo.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testParser() throws Exception {
-        System.out.println("parser");
-        
-        boolean saltarLinea = false;
-        String separador = ",";
-        ProcesadorArchivo instance = new ProcesadorArchivo();
-        List<List<String>> expResult = null;
-//        List<Object> result = instance.parser(false,"/home/zaldivar/csv/testCsv.csv", saltarLinea, separador);
-        
-//        assertEquals(4, result.size());
-    }
 
     /**
      * Test of hasRequiredExtensions method, of class ProcesadorArchivo.
@@ -87,12 +57,48 @@ public class ProcesadorArchivoTest {
     public void testHasRequiredExtensions() throws Exception {
         System.out.println("hasRequiredExtensions");
         String path = "";
+        File carpeta = folder.newFolder("carpeta");
+        File archivo1=File.createTempFile("Archivo1", ".csv", carpeta);
+        File archivo2 = File.createTempFile("Archivo2", ".csv", carpeta);
+        System.out.println("Path absoluto\t"+archivo1.getAbsolutePath());
         ProcesadorArchivo instance = new ProcesadorArchivo();
         List<Object> expResult = null;
-        List<Object> result = instance.hasRequiredExtensions(path);
-        assertEquals(expResult, result);
+        List<Object> result = instance.hasRequiredExtensions(carpeta.getAbsolutePath());
+        assertEquals(2, result.size());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
+    }
+
+    /**
+     * Test of parser method, of class ProcesadorArchivo.
+     * @throws java.lang.Exception
+     */
+//    @Test
+//    public void testParser() throws Exception {
+//        System.out.println("parser");
+//        boolean historico = false;
+//        String path = "";
+//        int saltarLinea = 0;
+//        String separador = "";
+//        ProcesadorArchivo instance = new ProcesadorArchivo();
+//        List<Object> expResult = null;
+//        List<Object> result = instance.parser(historico, path, saltarLinea, separador);
+//
+//    }
+
+    /**
+     * Test of validarPath method, of class ProcesadorArchivo.
+     * @throws java.io.IOException
+     */
+    @Test
+    public void testValidarPath() throws IOException {
+        System.out.println("validarPath");
+        File file=folder.newFolder("testFolder");
+        ProcesadorArchivo instance = new ProcesadorArchivo();
+        boolean expResult = true;
+        boolean result = instance.validarPath(file.getAbsolutePath());
+        assertEquals(expResult, result);
     }
     
 }
+
