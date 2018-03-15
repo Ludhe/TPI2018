@@ -53,13 +53,13 @@ public class crearJSONTest {
      */
     @Test
     public void testConvertirAEntidades() throws Exception {
-//        System.out.println("convertirAEntidades");
-//        List<List<List<Object>>> lista = null;
-//        boolean[] historicoOBitacora = null;
-//        crearJSON instance = new crearJSON();
-//        List<List<Object>> expResult = null;
-//        List<List<Object>> result = instance.convertirAEntidades(lista, historicoOBitacora);
-//        assertEquals(expResult, result);
+        System.out.println("convertirAEntidades");
+        List<List<List<Object>>> lista = null;
+        boolean[] historicoOBitacora = null;
+        crearJSON instance = new crearJSON();
+        List<List<Object>> expResult = null;
+        List<List<Object>> result = instance.convertirAEntidades(lista, historicoOBitacora);
+        assertEquals(expResult, result);
     }
 
     /**

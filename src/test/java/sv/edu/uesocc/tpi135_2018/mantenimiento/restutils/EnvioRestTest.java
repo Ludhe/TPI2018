@@ -7,13 +7,6 @@ package sv.edu.uesocc.tpi135_2018.mantenimiento.restutils;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation.Builder;
@@ -34,9 +27,6 @@ import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import sv.edu.uesocc.tpi135_2018.mantenimiento.definiciones.Bitacora;
-import sv.edu.uesocc.tpi135_2018.mantenimiento.definiciones.Historico;
-import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.crearJSON;
 
 /**
  *

@@ -1,0 +1,20 @@
+HISTORIAL DE MANTENIMIENTO PREVENTIVO,,,,
+Responsable del Equipo: Licda. Rina de Zometa,,,,
+,N.º Inventario,Marca,N.º Serie,Modelo
+,12040.3334.080.0017,Lenovo,MJVZLKF,Think Centre M82
+,,,,
+N.º,Fecha,Tipo Matto,Observaciones,
+,,,Hardware,Software
+1,7/3/2017,CRR,"Linea1 hardware
+Linea2 hardware","Restauración de fábrica de sistema operativo
+Linea2 softwarwe"
+2,13/03/17,CRR,-,"Restauración de fábrica de sistema operativo
+Instalación de programas utilitarios
+Creación de respaldo de datos
+Creación de cuenta de usuario standard"
+3,26/09/17,CON,-,Creación y configuración de cuenta local standard de usuario Doctorado
+4,17/11/17,PPR,Limpieza completa del equipo y sus componentes internos.,"Actualización de antivirus y navegadores
+Escaneo completo del equipo
+Instalación de actualizaciones para el sistema operativo
+Análisis profundo y desfragmentado de disco duro
+Cambio de contraseña al usuario ADMIN"

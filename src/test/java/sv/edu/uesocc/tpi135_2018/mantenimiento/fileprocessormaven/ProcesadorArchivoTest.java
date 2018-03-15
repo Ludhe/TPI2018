@@ -5,8 +5,10 @@
  */
 package sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven;
 
+import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -75,6 +77,25 @@ public class ProcesadorArchivoTest {
         boolean expResult = true;
         boolean result = instance.validarPath(file.getAbsolutePath());
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of parser method, of class ProcesadorArchivo.
+     */
+    @Test
+    public void testParser() throws Exception {
+        System.out.println("parser");
+        boolean historico = true;
+        File tempFile=folder.newFile("tmp.csv");
+        Files.write("1,NumInventario,20/03/2018,mantenimiento,observacionesSoftware,observacionesHardware", tempFile.getAbsoluteFile(), Charset.forName("UTF-8"));
+        String separador = ",";
+        System.out.println("Existe........................."+tempFile.exists());
+        ProcesadorArchivo instance = new ProcesadorArchivo();
+//        List<List<Object>> expResult = ;
+        List<List<Object>> result = instance.parser(historico,"src/test/resources/historico.csv", separador);
+        assertEquals("12040.3334.080.0017",result.get(0).get(0));
+        // TODO review the generated test code and remove the default call to fail.
+       
     }
     
 }
