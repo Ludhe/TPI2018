@@ -93,9 +93,12 @@ public class crearJSONTest {
         boolean[] historicoOBitacora = {false, true};
         crearJSON instance = new crearJSON();
         String js = "{\"Archivos\":[{\"tipo\":\"Bitacora\",\"Registros\":[{\"marca\":\"marca1\",\"numeroSerie\":\"numeroSerie1\",\"responsable\":\"responsable1\",\"sistemaOperativo\":\"sistemaOperativo1\",\"licencia\":true,\"numeroInventario\":\"numeroInventario1\",\"numero\":1,\"historico\":\"historico1\",\"observaciones\":\"observaciones1\",\"version\":\"version1\",\"modelo\":\"modelo1\"},{\"marca\":\"marca2\",\"numeroSerie\":\"numeroSerie2\",\"responsable\":\"responsable2\",\"sistemaOperativo\":\"sistemaOperativo2\",\"licencia\":true,\"numeroInventario\":\"numeroInventario2\",\"numero\":2,\"historico\":\"historico2\",\"observaciones\":\"observaciones2\",\"version\":\"version2\",\"modelo\":\"modelo2\"}]},{\"tipo\":\"Historico\",\"Registros\":[{\"fecha\":\"Tue Mar 07 00:00:00 CST 2017\",\"numero\":1,\"observacionesSoftware\":\"observacionesSoftware1\",\"observacionesHardware\":\"observacionesHardware1\",\"mantenimiento\":\"mantenimiento1\",\"numInventario\":\"1\"},{\"fecha\":\"Tue Mar 07 00:00:00 CST 2017\",\"numero\":2,\"observacionesSoftware\":\"observacionesSoftware2\",\"observacionesHardware\":\"observacionesHardware2\",\"mantenimiento\":\"mantenimiento2\",\"numInventario\":\"2\"},{\"fecha\":\"Tue Mar 07 00:00:00 CST 2017\",\"numero\":3,\"observacionesSoftware\":\"observacionesSoftware3\",\"observacionesHardware\":\"observacionesHardware3\",\"mantenimiento\":\"mantenimiento3\",\"numInventario\":\"3\"}]}]}";
+
         JSONObject jsonArr;
         jsonArr = new JSONObject(js);
         JSONObject expResult = jsonArr;
+        System.out.println("oc");
+        System.out.println(jsonArr);
         JSONObject result = instance.generarJSON(listB, historicoOBitacora);
         System.out.println(result);
         System.out.println(expResult);
