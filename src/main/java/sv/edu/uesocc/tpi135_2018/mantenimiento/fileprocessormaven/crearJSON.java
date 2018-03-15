@@ -53,8 +53,8 @@ public class crearJSON {
                             lista.get(i).get(j).get(6).toString(), 
                             lista.get(i).get(j).get(7).toString(), 
                             lista.get(i).get(j).get(8).toString(), 
-                            Boolean.parseBoolean(lista.get(i).get(j).get(9).toString()), 
-                            lista.get(i).get(j).get(10).toString() ) );
+                            ((lista.get(i).get(j).get(9).toString() != null) && !lista.get(i).get(j).get(9).toString().isEmpty() ), 
+                            lista.get(i).get(j).get(11).toString() ) );
                 }
             }
             convertida.add(listaEntidad);

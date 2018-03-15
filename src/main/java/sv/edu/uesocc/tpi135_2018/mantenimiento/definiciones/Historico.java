@@ -25,7 +25,7 @@ public class Historico implements Serializable{
     private String observacionesSoftware;
     private String observacionesHardware;
     
-    public Historico( String numInventario,int numero, Date fecha, String mantenimiento, String observacionesSoftware, String observacionesHardware ){
+    public Historico( String numInventario,int numero, Date fecha, String mantenimiento, String observacionesHardware, String observacionesSoftware ){
         this.numero = numero;
         this.numInventario = numInventario;
         this.fecha = fecha;
