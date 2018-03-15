@@ -60,7 +60,7 @@ public class crearJSON {
     }
 
     public JSONObject generarJSON(List<List<Object>> listB, boolean[] historicoOBitacora) throws IOException {
-        JSONArray jsArray = new JSONArray();
+        JSONArray jsArray;
         JSONArray jsArray2 = new JSONArray();
         JSONObject jsObj = null;
         for (int i = 0; i < listB.size(); i++) {
@@ -69,23 +69,24 @@ public class crearJSON {
                 jsObj = new JSONObject(listB.get(i).get(j));
                 jsArray.put(jsObj);
             }
-            System.out.println(jsArray);
+            //System.out.println(jsArray);
             jsObj = new JSONObject();
             if (historicoOBitacora[i] == true) {
                 jsObj.put("tipo", "Historico");
                 jsObj.put("Registros", jsArray);
-                System.out.println(jsObj);
+               // System.out.println(jsObj);
             } else if (historicoOBitacora[i] == false) {
 
                 jsObj.put("tipo", "Bitacora");
                 jsObj.put("Registros", jsArray);
-                System.out.println(jsObj);
+                //System.out.println(jsObj);
             }
             jsArray2.put(jsObj);
         }
-        System.out.println(jsArray2);
+        //System.out.println(jsArray2);
         jsObj = new JSONObject();
         jsObj.put("Archivos", jsArray2);
+        System.out.println("json");
         System.out.println(jsObj);
         return jsObj;
     }
