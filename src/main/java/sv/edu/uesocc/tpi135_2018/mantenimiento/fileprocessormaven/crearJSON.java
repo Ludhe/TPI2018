@@ -16,7 +16,7 @@ import org.json.JSONArray;
  */
 public class crearJSON {
 
-    public JSONArray generarJSON(List<List<Object>> listB, boolean[] historicoOBitacora) throws IOException {
+   public JSONArray generarJSON(List<List<Object>> listB, boolean[] historicoOBitacora) throws IOException {
 
 //        ProcesadorArchivo arc = new ProcesadorArchivo();
 //        List<List<Object>> listB = null;
@@ -42,13 +42,13 @@ public class crearJSON {
 
             if (historicoOBitacora[i] == true) {
                 jsObj.put("tipo", "Historico");
-                jsObj.put("Registros", jsArray.get(i));
+                jsObj.put("Registros", jsArray);
                 System.out.println(jsObj);
 
             } else if (historicoOBitacora[i] == false) {
                 
                 jsObj.put("tipo", "Bitacora");
-                jsObj.put("Registros", jsArray.get(i));
+                jsObj.put("Registros", jsArray);
                 System.out.println(jsObj);
             }
             jsArray2.put(jsObj);
@@ -57,6 +57,7 @@ public class crearJSON {
         //jsArray2.put(jsObj);
 
         System.out.println(jsArray2);
+        
 
         return jsArray2;
     }
