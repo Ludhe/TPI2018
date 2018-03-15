@@ -16,7 +16,7 @@ import org.json.JSONArray;
  */
 public class crearJSON {
 
-   public JSONArray generarJSON(List<List<Object>> listB, boolean[] historicoOBitacora) throws IOException {
+   public JSONObject generarJSON(List<List<Object>> listB, boolean[] historicoOBitacora) throws IOException {
 
 //        ProcesadorArchivo arc = new ProcesadorArchivo();
 //        List<List<Object>> listB = null;
@@ -57,9 +57,12 @@ public class crearJSON {
         //jsArray2.put(jsObj);
 
         System.out.println(jsArray2);
+        jsObj =  new JSONObject();
+        jsObj.put("Archivos", jsArray2);
+        System.out.println(jsObj);
         
 
-        return jsArray2;
+        return jsObj;
     }
 
 }

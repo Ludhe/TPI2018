@@ -124,12 +124,12 @@ System.out.println(listB.get(1));
         
         boolean[] historicoOBitacora = {false,true};
         crearJSON instance = new crearJSON();
-        String js = "[]";
-        JSONArray jsonArr;
-        jsonArr = new JSONArray(js);
+        String js = "{}";
+        JSONObject jsonArr;
+        jsonArr = new  JSONObject(js);
         
-        JSONArray expResult = jsonArr;
-        JSONArray result = instance.generarJSON(listB, historicoOBitacora);
+        JSONObject expResult = jsonArr;
+        JSONObject result = instance.generarJSON(listB, historicoOBitacora);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
