@@ -6,6 +6,7 @@
 package sv.edu.uesocc.tpi135_2018.mantenimiento.restutils;
 
 import java.io.IOException;
+import java.net.URI;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -19,11 +20,15 @@ import org.json.JSONObject;
  */
 public class EnvioRest {
     Client cliente = ClientBuilder.newClient();
-    public Response Envio(JSONObject migracion, String path) throws IOException {
+    public URI Envio(JSONObject migracion, String path) throws IOException {
         WebTarget raiz = cliente.target(path);
         Response respuesta = raiz.request(MediaType.APPLICATION_JSON).post(Entity.json(migracion));
-        System.out.println(respuesta);
-        return respuesta;
+        if(respuesta.getStatus() == Response.Status.CREATED.getStatusCode()){
+               return respuesta.getLocation();
+        }else{
+            return null;
+        }
+        
     }
 }
 
