@@ -21,7 +21,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import org.json.JSONArray;
+import netscape.javascript.JSObject;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -83,57 +83,18 @@ public class EnvioRestTest {
     /**
      * Test of Envio method, of class EnvioRest.
      */
-      @Test
-    public void testGenerarJSON() throws Exception {
-        System.out.println("generarJSON");
-        
-        
-        List<List<Object>> listB =  new ArrayList<>();
-        ArrayList<Object> listC = new ArrayList<>();
-        Bitacora go = new Bitacora(1, "historico1", "numeroInventario1", "marca1", "numeroSerie1", "modelo1", "responsable1", "sistemaOperativo1", "version1", true, "observaciones1");
-        Bitacora go1 = new Bitacora(2, "historico2", "numeroInventario2", "marca2", "numeroSerie2", "modelo2", "responsable2", "sistemaOperativo2", "version2", true, "observaciones2");
-        listC.add(go);
-        listC.add(go1);
-        System.out.println(listC.get(0));   
-        
-//        List<List<Object>> listD =  new ArrayList<>();
-        ArrayList<Object> listE = new ArrayList<>();
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date d = null;
-        try {
-            d = sdf.parse("07/03/2017");
-        } catch (ParseException ex) {
-            Logger.getLogger(EnvioRestTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        Historico to = new Historico(1, 1, d, "mantenimiento1", "observacionesSoftware1", "observacionesHardware1");
-        Historico to1 = new Historico(2, 2, d, "mantenimiento2", "observacionesSoftware2", "observacionesHardware2");
-        Historico to2 = new Historico(3, 3, d, "mantenimiento3", "observacionesSoftware3", "observacionesHardware3");
-        listE.add(to);
-        listE.add(to1);
-        listE.add(to2);
-        
-        
-        listB.add(listC);
-        listB.add(listE);
-//        System.out.println(listC);
-//        System.out.println(listE);
-System.out.println(listB.get(1));
-        
-        
-        boolean[] historicoOBitacora = {false,true};
-        crearJSON instance = new crearJSON();
-        String js = "{}";
-        JSONObject jsonArr;
-        jsonArr = new  JSONObject(js);
-        
-        JSONObject expResult = jsonArr;
-        JSONObject result = instance.generarJSON(listB, historicoOBitacora);
+     
+    @Test
+    public void testEnvio() throws Exception {
+        JSONObject migracion = new JSONObject("{}");
+        System.out.println("Envio");
+        String path = "/migracion";
+        EnvioRest instance = new EnvioRest();
+        URI expResult = URI.create("http://localhost:8080/migracion");
+        URI result = instance.Envio(migracion, path);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
     }
-
-
+    
+    
 }

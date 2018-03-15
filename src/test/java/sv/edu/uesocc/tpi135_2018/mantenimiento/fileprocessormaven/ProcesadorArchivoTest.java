@@ -7,9 +7,6 @@ package sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -48,7 +45,6 @@ public class ProcesadorArchivoTest {
     public void tearDown() {
     }
 
-
     /**
      * Test of hasRequiredExtensions method, of class ProcesadorArchivo.
      * @throws java.lang.Exception
@@ -65,26 +61,7 @@ public class ProcesadorArchivoTest {
         List<Object> expResult = null;
         List<Object> result = instance.hasRequiredExtensions(carpeta.getAbsolutePath());
         assertEquals(2, result.size());
-        // TODO review the generated test code and remove the default call to fail.
-       
     }
-
-    /**
-     * Test of parser method, of class ProcesadorArchivo.
-     * @throws java.lang.Exception
-     */
-//    @Test
-//    public void testParser() throws Exception {
-//        System.out.println("parser");
-//        boolean historico = false;
-//        String path = "";
-//        int saltarLinea = 0;
-//        String separador = "";
-//        ProcesadorArchivo instance = new ProcesadorArchivo();
-//        List<Object> expResult = null;
-//        List<Object> result = instance.parser(historico, path, saltarLinea, separador);
-//
-//    }
 
     /**
      * Test of validarPath method, of class ProcesadorArchivo.

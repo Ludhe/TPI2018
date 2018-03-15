@@ -31,68 +31,49 @@ public class crearJSON {
                 if (historicoOBitacora[i]) {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = null;
-                    d= sdf.parse(lista.get(i).get(j).get(2).toString());
-                    
-                    System.out.println("lista en convertirAEntidades");
-                    System.out.println(lista.get(i).get(j));
+                    d = sdf.parse(lista.get(i).get(j).get(2).toString());
                     listaEntidad.add(new Historico(lista.get(i).get(j).get(0).toString(),
                             Integer.parseInt(lista.get(i).get(j).get(1).toString()),
-                            d, 
+                            d,
                             lista.get(i).get(j).get(3).toString(),
-                            lista.get(i).get(j).get(4).toString(), 
-                            lista.get(i).get(j).get(5).toString() ) );
-                    System.out.println("Termino una entidad");
-                    System.out.println(listaEntidad);
-                }else{
-                    listaEntidad.add(new Bitacora(Integer.parseInt(lista.get(i).get(j).get(0).toString()),
-                            lista.get(i).get(j).get(1).toString(), 
-                            lista.get(i).get(j).get(2).toString(), 
-                            lista.get(i).get(j).get(3).toString(), 
                             lista.get(i).get(j).get(4).toString(),
-                            lista.get(i).get(j).get(5).toString(), 
-                            lista.get(i).get(j).get(6).toString(), 
-                            lista.get(i).get(j).get(7).toString(), 
-                            lista.get(i).get(j).get(8).toString(), 
-                            Boolean.parseBoolean(lista.get(i).get(j).get(9).toString()), 
-                            lista.get(i).get(j).get(10).toString() ) );
+                            lista.get(i).get(j).get(5).toString()));
+                } else {
+                    listaEntidad.add(new Bitacora(Integer.parseInt(lista.get(i).get(j).get(0).toString()),
+                            lista.get(i).get(j).get(1).toString(),
+                            lista.get(i).get(j).get(2).toString(),
+                            lista.get(i).get(j).get(3).toString(),
+                            lista.get(i).get(j).get(4).toString(),
+                            lista.get(i).get(j).get(5).toString(),
+                            lista.get(i).get(j).get(6).toString(),
+                            lista.get(i).get(j).get(7).toString(),
+                            lista.get(i).get(j).get(8).toString(),
+                            Boolean.parseBoolean(lista.get(i).get(j).get(9).toString()),
+                            lista.get(i).get(j).get(10).toString()));
                 }
             }
             convertida.add(listaEntidad);
             listaEntidad = new ArrayList<>();
         }
-
         return convertida;
     }
 
     public JSONObject generarJSON(List<List<Object>> listB, boolean[] historicoOBitacora) throws IOException {
-        
-        
-        
         JSONArray jsArray = new JSONArray();
         JSONArray jsArray2 = new JSONArray();
         JSONObject jsObj = null;
-
-//        listB = arc.parser("src/main/resources/bitacora.csv", false, ",");
         for (int i = 0; i < listB.size(); i++) {
             jsArray = new JSONArray();
-
             for (int j = 0; j < listB.get(i).size(); j++) {
                 jsObj = new JSONObject(listB.get(i).get(j));
-                //System.out.println(jsObj);
                 jsArray.put(jsObj);
-                //System.out.println(jsArray);
             }
             System.out.println(jsArray);
-//            jsArray.put(jsObj);
-//System.out.println(jsObj);
-
             jsObj = new JSONObject();
-
             if (historicoOBitacora[i] == true) {
                 jsObj.put("tipo", "Historico");
                 jsObj.put("Registros", jsArray);
                 System.out.println(jsObj);
-
             } else if (historicoOBitacora[i] == false) {
 
                 jsObj.put("tipo", "Bitacora");
@@ -101,15 +82,10 @@ public class crearJSON {
             }
             jsArray2.put(jsObj);
         }
-//        jsArray = new JSONArray();
-        //jsArray2.put(jsObj);
-
         System.out.println(jsArray2);
         jsObj = new JSONObject();
         jsObj.put("Archivos", jsArray2);
         System.out.println(jsObj);
-
         return jsObj;
     }
-
 }
