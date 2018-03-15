@@ -2,6 +2,7 @@ package sv.edu.uesocc.tpi135_2018.mantenimiento.ui;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.net.URI;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,9 +14,12 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.ProcesadorArchivo;
 import javax.swing.table.DefaultTableModel;
+import org.json.JSONObject;
 import sv.edu.uesocc.tpi135_2018.mantenimiento.fileprocessormaven.crearJSON;
+import sv.edu.uesocc.tpi135_2018.mantenimiento.restutils.EnvioRest;
 
 public class PantallaInicial extends javax.swing.JFrame {
 
@@ -329,7 +333,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                 listaDeObjects.add(procesadorArchivo.parser(Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()), jTable2.getValueAt(i, 0).toString(), jTable2.getValueAt(i, 2).toString()));
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error al convertir el archivo: " + jTable2.getValueAt(i, 0), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al convertir el archivo: " + jTable2.getValueAt(i, 0)+ex.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -339,12 +343,35 @@ public class PantallaInicial extends javax.swing.JFrame {
             listaDeEntidades = cj.convertirAEntidades(listaDeObjects, historicos);
             System.out.println(cj.generarJSON(listaDeEntidades, historicos));
         } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Error al convertir una fecha..." + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al convertir una fecha..." + e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error al convertir archivos..." + ex.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 
         }
-
+        
+        try {
+            JSONObject jo = cj.generarJSON(listaDeEntidades, historicos);
+            JTextArea hoja = new JTextArea();
+            hoja.setText(jo.toString(2));
+            JOptionPane.showMessageDialog(this,hoja);
+            EnvioRest er = new EnvioRest();
+        
+            URI uri = er.Envio(jo, "/servidor");
+            if(uri==null){
+                JOptionPane.showMessageDialog(this, "Error al enviar el JSON\n", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this, "El JSON fue recibido exitosamente. Puede acceder al contenido en: "+uri);
+            }
+        
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al generar JSON\n"+ex.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al enviar el JSON\n"+e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
