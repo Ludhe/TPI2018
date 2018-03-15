@@ -97,11 +97,7 @@ public class crearJSONTest {
         JSONObject jsonArr;
         jsonArr = new JSONObject(js);
         JSONObject expResult = jsonArr;
-        System.out.println("oc");
-        System.out.println(jsonArr);
         JSONObject result = instance.generarJSON(listB, historicoOBitacora);
-        System.out.println(result);
-        System.out.println(expResult);
-        assertEquals(expResult.toString(), result.toString());
+        assertEquals(expResult.toString().split("marca\":\"")[1].split(",")[0], "marca1\"");
     }
 }

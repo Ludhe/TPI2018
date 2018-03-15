@@ -69,25 +69,18 @@ public class crearJSON {
                 jsObj = new JSONObject(listB.get(i).get(j));
                 jsArray.put(jsObj);
             }
-            //System.out.println(jsArray);
             jsObj = new JSONObject();
             if (historicoOBitacora[i] == true) {
                 jsObj.put("tipo", "Historico");
                 jsObj.put("Registros", jsArray);
-               // System.out.println(jsObj);
             } else if (historicoOBitacora[i] == false) {
-
                 jsObj.put("tipo", "Bitacora");
                 jsObj.put("Registros", jsArray);
-                //System.out.println(jsObj);
             }
             jsArray2.put(jsObj);
         }
-        //System.out.println(jsArray2);
         jsObj = new JSONObject();
         jsObj.put("Archivos", jsArray2);
-        System.out.println("json");
-        System.out.println(jsObj);
         return jsObj;
     }
 }
