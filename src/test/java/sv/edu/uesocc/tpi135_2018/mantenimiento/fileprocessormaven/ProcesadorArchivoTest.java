@@ -86,10 +86,7 @@ public class ProcesadorArchivoTest {
     public void testParser() throws Exception {
         System.out.println("parser");
         boolean historico = true;
-        File tempFile=folder.newFile("tmp.csv");
-        Files.write("1,NumInventario,20/03/2018,mantenimiento,observacionesSoftware,observacionesHardware", tempFile.getAbsoluteFile(), Charset.forName("UTF-8"));
         String separador = ",";
-        System.out.println("Existe........................."+tempFile.exists());
         ProcesadorArchivo instance = new ProcesadorArchivo();
 //        List<List<Object>> expResult = ;
         List<List<Object>> result = instance.parser(historico,"src/test/resources/historico.csv", separador);
