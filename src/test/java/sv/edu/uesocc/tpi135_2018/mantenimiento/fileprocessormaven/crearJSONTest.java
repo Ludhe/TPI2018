@@ -53,13 +53,34 @@ public class crearJSONTest {
      */
     @Test
     public void testConvertirAEntidades() throws Exception {
-//        System.out.println("convertirAEntidades");
-//        List<List<List<Object>>> lista = null;
-//        boolean[] historicoOBitacora = null;
-//        crearJSON instance = new crearJSON();
-//        List<List<Object>> expResult = null;
-//        List<List<Object>> result = instance.convertirAEntidades(lista, historicoOBitacora);
-//        assertEquals(expResult, result);
+        System.out.println("convertirAEntidades");
+        Historico hist = new Historico();
+        List<List<List<Object>>> lista = new ArrayList<>();
+        List<List<Object>> listB = new ArrayList<>();
+        List<Object> listC = new ArrayList<>();
+        List<Object> listaObj = new ArrayList<>();
+        List<List<Object>> listaMayor= new ArrayList<>();
+        
+        listaObj.add(hist);
+        listaMayor.add(listaObj);
+        
+        listC.add("000001");
+        listC.add("1");
+        listC.add("25/10/2017");
+        listC.add("2");
+        listC.add("observacionesHardware");
+        listC.add("observacionesSoftware");
+        
+        listB.add(listC);
+        lista.add(listB);
+        
+        boolean[] historicoOBitacora = new boolean[]{true};
+        crearJSON instance = new crearJSON();
+        List<List<Object>> result = instance.convertirAEntidades(lista, historicoOBitacora);
+        System.out.println(result.get(0).get(0));
+        
+        assertEquals(result.get(0).get(0).getClass(), listaMayor.get(0).get(0).getClass());
+        
     }
 
     /**
