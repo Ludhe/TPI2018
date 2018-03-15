@@ -24,7 +24,7 @@ public class crearJSON {
         String[] encabezado = new String[]{"N°", "Historico Mantenimientos", "N° Inventario", "Marca", "N° de Serie", "Modelo",
             "Responsable", "Sistema Operativo", "Versión", "Licencia (Si/No)", "Observaciones"};
 
-        lista = arc.parser("src/main/resources/Sin-título-1.csv", false, ",");
+//        lista = arc.parser("src/main/resources/Sin-título-1.csv", false, ",");
 
         ArrayList<Bitacora> listB = new ArrayList<>();
         Bitacora obj = new Bitacora(0, "shobe se la come", "numeroInventario", "marca", "numeroSerie", "modelo", "responsable", "sistemaOperativo", "version", true, "observaciones");

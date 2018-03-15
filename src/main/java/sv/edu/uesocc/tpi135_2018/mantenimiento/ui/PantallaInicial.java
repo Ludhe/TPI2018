@@ -276,7 +276,7 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         String seleccionado = listaIzquierda.getSelectedValue();
         if (seleccionado != null) {
-            modelo.addRow(new Object[]{seleccionado, 1, ","});
+            modelo.addRow(new Object[]{seleccionado, true, ","});
             modeloListaIzquierda.remove(listaIzquierda.getSelectedIndex());
         }
         toggleButton();
@@ -285,7 +285,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     private void btnAgregarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodosActionPerformed
 
         for (int i = 0; i < modeloListaIzquierda.size(); i++) {
-            modelo.addRow(new Object[]{modeloListaIzquierda.getElementAt(i), 1, ","});
+            modelo.addRow(new Object[]{modeloListaIzquierda.getElementAt(i), true, ","});
         }
         modeloListaIzquierda.removeAllElements();
         toggleButton();
@@ -314,7 +314,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         int i = 0;
         try {
             for (i = 0; i < jTable2.getRowCount(); i++) {
-                System.out.println(procesadorArchivo.parser(jTable2.getValueAt(i, 0).toString(), Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()), jTable2.getValueAt(i, 2).toString()));
+                procesadorArchivo.parser(Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()), jTable2.getValueAt(i, 0).toString(),jTable2.getValueAt(i, 2).toString());
                 //TODO AGREGAR A LA LISTA DE LISTAS DE OBJETOS
             }
 
