@@ -54,6 +54,7 @@ public class crearJSONTest {
     @Test
     public void testConvertirAEntidades() throws Exception {
         System.out.println("convertirAEntidades");
+
         Historico hist = new Historico();
         List<List<List<Object>>> lista = new ArrayList<>();
         List<List<Object>> listB = new ArrayList<>();
@@ -81,6 +82,7 @@ public class crearJSONTest {
         
         assertEquals(result.get(0).get(0).getClass(), listaMayor.get(0).get(0).getClass());
         
+
     }
 
     /**

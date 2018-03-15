@@ -20,7 +20,7 @@ import org.json.JSONObject;
  */
 public class EnvioRest {
     Client cliente = ClientBuilder.newClient();
-    public URI Envio(JSONObject migracion, String path) throws IOException {
+    public URI Envio(JSONObject migracion, String path) throws Exception{
         WebTarget raiz = cliente.target(path);
         Response respuesta = raiz.request(MediaType.APPLICATION_JSON).post(Entity.json(migracion));
         if(respuesta.getStatus() == Response.Status.CREATED.getStatusCode()){
