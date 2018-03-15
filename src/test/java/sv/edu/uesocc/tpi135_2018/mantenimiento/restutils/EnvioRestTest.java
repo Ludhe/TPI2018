@@ -21,7 +21,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import netscape.javascript.JSObject;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
