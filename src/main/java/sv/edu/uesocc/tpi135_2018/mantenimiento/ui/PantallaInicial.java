@@ -312,6 +312,7 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         List<List<Object>> aConvertir = new ArrayList<>();
         int i = 0;
+
         try {
             for (i = 0; i < jTable2.getRowCount(); i++) {
                 procesadorArchivo.parser(Boolean.parseBoolean(jTable2.getValueAt(i, 1).toString()), jTable2.getValueAt(i, 0).toString(),jTable2.getValueAt(i, 2).toString());
@@ -322,6 +323,7 @@ public class PantallaInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al convertir el archivo: " + jTable2.getValueAt(i, 0), "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
