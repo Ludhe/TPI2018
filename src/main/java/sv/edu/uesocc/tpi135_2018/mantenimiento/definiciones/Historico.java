@@ -125,7 +125,14 @@ public class Historico implements Serializable{
     public JsonObject toJson(){
         JsonBuilderFactory factory=Json.createBuilderFactory(null);
         JsonObject object = factory.createObjectBuilder()
-                .add("numeroInventario",thisnu)
+                .add("numeroInventario",this.numInventario)
+                .add("fecha",this.fecha.toString())
+                .add("mantenimiento",this.mantenimiento)
+                .add("obsrvacionesSoftware",this.observacionesSoftware)
+                .add("observacioneHardware",this.observacionesHardware)
+                .build();
+        
+        return object;
     }
            /*private int numero;
     private String numInventario;
