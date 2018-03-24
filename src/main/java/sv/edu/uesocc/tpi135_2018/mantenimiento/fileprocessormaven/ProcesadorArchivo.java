@@ -24,6 +24,20 @@ import sv.edu.uesocc.tpi135_2018.mantenimiento.definiciones.Bitacora;
  * @author zaldivar
  */
 public class ProcesadorArchivo {
+    
+    public enum Extension{
+        CSV(".csv"),
+        TXT(".txt");
+        
+        private final String type;
+        private Extension(String type){
+            this.type=type;
+        }
+        @Override
+        public String toString(){
+            return type;
+        }
+    }
 
     private Path absolutePath;
 
@@ -39,13 +53,13 @@ public class ProcesadorArchivo {
         return false;
     }
 
-    public List<Object> hasRequiredExtensions(final String path) throws IOException {
+    public List<Object> hasRequiredExtensions(final String path,final Extension extension)throws IOException {
         List<Object> lista = new ArrayList<>();
         if (path != null && !path.isEmpty()) {
             this.absolutePath = Paths.get(path);
             lista = Files.walk(absolutePath).
                     filter(a -> validarPath(path)).
-                    filter(a -> a.getFileName().toString().endsWith(".csv")).
+                    filter(a -> a.getFileName().toString().endsWith(extension.toString())).
                     collect(toList());
         }
         return lista;
