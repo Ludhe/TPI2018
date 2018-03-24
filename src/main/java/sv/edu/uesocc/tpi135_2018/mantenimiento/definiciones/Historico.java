@@ -6,6 +6,9 @@
 package sv.edu.uesocc.tpi135_2018.mantenimiento.definiciones;
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.Json;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
@@ -118,5 +121,16 @@ public class Historico implements Serializable{
     public void setNumInventario(String numInventario) {
         this.numInventario = numInventario;
     }
-            
+    
+    public JsonObject toJson(){
+        JsonBuilderFactory factory=Json.createBuilderFactory(null);
+        JsonObject object = factory.createObjectBuilder()
+                .add("numeroInventario",thisnu)
+    }
+           /*private int numero;
+    private String numInventario;
+    private Date fecha;
+    private String mantenimiento;
+    private String observacionesSoftware;
+    private String observacionesHardware;*/ 
 }

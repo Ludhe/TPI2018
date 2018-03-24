@@ -6,6 +6,10 @@
 package sv.edu.uesocc.tpi135_2018.mantenimiento.definiciones;
 
 import java.io.Serializable;
+import javax.json.Json;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -133,11 +137,21 @@ public class Bitacora implements Serializable{
         this.observaciones = observaciones;
     }
     
-    
-    
-    
-    
-    
-    
-    
+    public JsonObject toJson(){
+        JsonBuilderFactory factory=Json.createBuilderFactory(null);
+        JsonObject object=factory.createObjectBuilder()
+                .add("numero",this.numero)
+                .add("historico",this.historico)
+                .add("numeroInventario",this.numeroInventario)
+                .add("marca",this.marca)
+                .add("numeroSerie",this.numeroSerie)
+                .add("modelo",this.responsable)
+                .add("sistemaOperativo",this.sistemaOperativo)
+                .add("version",this.version)
+                .add("licencia",this.licencia)
+                .add("observaciones",this.observaciones).build();
+        
+        return object;
+    }
+
 }
