@@ -12,12 +12,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
-import sv.edu.uesocc.tpi135_2018.mantenimiento.definiciones.Bitacora;
 
 /**
  *

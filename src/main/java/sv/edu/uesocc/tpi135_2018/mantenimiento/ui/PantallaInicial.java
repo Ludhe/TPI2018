@@ -257,7 +257,7 @@ public class PantallaInicial extends javax.swing.JFrame {
             if (selector.getSelectedFile().canRead()) {
                 String fileName = selector.getSelectedFile().getPath(); //getAbsolutePath
                 try {
-                    List<Object> lista = procesadorArchivo.hasRequiredExtensions(fileName);
+                    List<Object> lista = procesadorArchivo.hasRequiredExtensions(fileName,ProcesadorArchivo.Extension.CSV);
                     lblRuta.setText(fileName);
                     for (int i = 0; i < lista.size(); i++) {
                         modeloListaIzquierda.addElement(lista.get(i).toString());
@@ -344,7 +344,7 @@ public class PantallaInicial extends javax.swing.JFrame {
             System.out.println(cj.generarJSON(listaDeEntidades, historicos));
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null, "Error al convertir una fecha..." + e.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al convertir archivos..." + ex.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
 
         }
@@ -403,12 +403,8 @@ public class PantallaInicial extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                new PantallaInicial().setVisible(true);
-
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PantallaInicial().setVisible(true);
         });
     }
 
